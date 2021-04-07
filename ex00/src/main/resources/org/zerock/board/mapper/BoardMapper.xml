@@ -15,6 +15,10 @@
 		where rnum between 1 and 10
 	</select>
 	
+	<select id="view" resultType="org.zerock.board.vo.BoardVO">
+	  select no, title, content, to_char(writeDate, 'yyyy-mm-dd') writeDate, hit from board where no = 5
+	</select>
+	
 
 
 </mapper>

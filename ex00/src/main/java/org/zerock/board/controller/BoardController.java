@@ -67,9 +67,12 @@ class BoardController {
 	// 실행할 메서드 - 글보기 
 	// 맵핑 - get 방식. view.do
 	@GetMapping("/view.do")
-	public String view() {
+	public String view(Model model) throws Exception {
 		
 		log.info("view() - 게시판 글보기 처리 ----------------");
+		
+		// model에 데이터 담으면 model안에 있는 request에 데이터가 담긴다.
+		model.addAttribute("view", service.view());
 		
 		return MODULE + "/view";
 	}

@@ -43,7 +43,10 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public BoardVO view() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		log.info("view() - 게시판 글보기 서비스 실행 ******");
+		
+		
+		return mapper.view();
 	}
 
 	@Override

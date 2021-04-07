@@ -14,6 +14,7 @@ public interface BoardMapper {
 	
 	// 2. 글보기
 	public BoardVO view() throws Exception;
+	
 	// 2-1. 조회수 1증가
 	public int increase() throws Exception;
 	
