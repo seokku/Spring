@@ -22,7 +22,7 @@ import lombok.extern.log4j.Log4j;
 class BoardController {
 	
 	
-	private final String MODULE = "board";
+	private final String MODULE = "board"; 
 	
 	// @Setter - lombok 사용, @Autowired - Spring 사용
 	// 대신 사용 가능한 어노테이션: @Autowired, - Spring, @Inject - java
