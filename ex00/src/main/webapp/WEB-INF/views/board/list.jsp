@@ -15,4 +15,4 @@ ${list }
 <a href="write.do">글쓰기</a>
 <a href="view.do">글보기</a>
 </body>
-</html>
+</html> 
