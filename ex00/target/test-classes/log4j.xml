@@ -33,6 +33,19 @@
 		<level value="info" />
 	</logger>
 
+	<!-- log4dbcj 로그 출력 정도 정한다. root tag 위에 정의 -->
+	<logger name="jdbc.audit">
+		<level value="warn" />
+	</logger>
+	
+	<logger name="jdbc.resultset">
+		<level value="warn" />
+	</logger>
+
+	<logger name="jdbc.connection">
+		<level value="warn" />
+	</logger>
+	
 	<!-- Root Logger -->
 	<root>
 		<priority value="info" />

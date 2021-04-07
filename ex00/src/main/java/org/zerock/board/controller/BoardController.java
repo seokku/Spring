@@ -1,7 +1,9 @@
 package org.zerock.board.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,17 +27,20 @@ class BoardController {
 	// @Setter - lombok 사용, @Autowired - Spring 사용
 	// 대신 사용 가능한 어노테이션: @Autowired, - Spring, @Inject - java
 	// DI 적용 시 BoardService 타입 : 1. BoardService 인터페이스 2. BoardServiceImpl 클래스
-	@Setter(onMethod_ =@Autowired)
+//	@Setter(onMethod_ =@Autowired)
+	@Autowired
+	@Qualifier("bsi")
 	private BoardService service;
 	
 	// 실행할 메서드 - 리스트
 	// 맵핑 - get 방식. list.do
 	@GetMapping("/list.do")
-	public String list() throws Exception {
+	public String list(Model model) throws Exception {
 		
 		log.info("list() - 게시판 리스트 ----------------");
 		
-		service.list();
+		// model에 데이터 담으면 model안에 있는 request에 데이터가 담긴다.
+		model.addAttribute("list", service.list());
 		
 		return MODULE + "/list";
 	}
