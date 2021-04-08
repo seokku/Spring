@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zerock.board.service.BoardService;
+import org.zerock.board.vo.BoardVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -57,9 +58,11 @@ class BoardController {
 	// 실행할 메서드 - 글쓰기 처리
 	// 맵핑 - post 방식. write.do
 	@PostMapping("/write.do")
-	public String write() {
+	public String write(BoardVO vo) throws Exception {
 		
-		log.info("write() - 게시판 글쓰기 처리 ----------------");
+		log.info("write().vo :" + vo + " - 게시판 글쓰기 처리 ----------------");
+		
+		service.write(vo);
 		
 		return "redirect:list.do";
 	}
@@ -67,42 +70,47 @@ class BoardController {
 	// 실행할 메서드 - 글보기 
 	// 맵핑 - get 방식. view.do
 	@GetMapping("/view.do")
-	public String view(Model model) throws Exception {
+	public String view(Model model, Long no) throws Exception {
 		
-		log.info("view() - 게시판 글보기 처리 ----------------");
+		log.info("view().no : " + no + " - 게시판 글보기 처리 ----------------");
 		
 		// model에 데이터 담으면 model안에 있는 request에 데이터가 담긴다.
-		model.addAttribute("view", service.view());
+		model.addAttribute("vo", service.view(no));
 		
+		// WEB-INF/view/ + board/view + .jsp
 		return MODULE + "/view";
 	}
 	
 	// 실행할 메서드 - 글수정 폼
 	// 맵핑 - get 방식. update.do
 	@GetMapping("/update.do")
-	public String updateForm() {
+	public String updateForm(Model model, Long no) throws Exception {
 		
 		log.info("updateForm() - 게시판 글수정 폼 처리 ----------------");
 		
+		model.addAttribute("vo", service.view(no));
 		return MODULE + "/update";
 	}
 	
 	// 실행할 메서드 - 글수정 처리
 	// 맵핑 - post 방식. update.do
 	@PostMapping("/update.do")
-	public String update() {
+	public String update(BoardVO vo) throws Exception {
 		
-		log.info("update() - 게시판 글수정 처리 ----------------");
+		log.info("update().vo : " + vo + " - 게시판 글수정 처리 ----------------");
 		
-		return "redirect:view.do";
+		service.update(vo);
+		return "redirect:view.do?no=" + vo.getNo();
 	}
 	
 	// 실행할 메서드 - 글삭제 처리
 	// 맵핑 - get 방식. delete.do
 	@GetMapping("/delete.do")
-	public String delete() {
+	public String delete(Long no) throws Exception{
 		
-		log.info("delete() - 게시판 글삭제 처리 ----------------");
+		log.info("delete().no : " + no + " - 게시판 글삭제 처리 ----------------");
+		
+		service.delete(no);
 		
 		return "redirect:list.do";
 	}
