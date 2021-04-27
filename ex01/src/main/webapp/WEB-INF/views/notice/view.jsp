@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 글보기</title>​
+<title>공지사항 글보기</title>​
 
 <!-- bootstrap 라이브러리 등록 CDN방식 : sitemesh에서 decorator.jsp에서 한꺼번에 해결 -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -52,7 +52,7 @@ $(function(){
 </head>
 <body>
 	<div class="container">
-		<h1>게시판 글보기</h1>
+		<h1>공지사항 글보기</h1>
 		<!-- 데이터 표시하는 부분 -->
 		<ul class="list-group">
 			<li class="list-group-item row">
@@ -73,29 +73,32 @@ $(function(){
 			</li>
 
 			<li class="list-group-item row">
-				<div class="col-md-2 title_label">작성자</div>
-				<div class="col-md-10">${vo.writer }</div>
+				<div class="col-md-2 title_label">공지시작일</div>
+				<div class="col-md-10">${vo.startDate }</div>
+			</li>
+
+			<li class="list-group-item row">
+				<div class="col-md-2 title_label">공지종료일</div>
+				<div class="col-md-10">${vo.endDate }</div>
 			</li>
 
 			<li class="list-group-item row">
 				<div class="col-md-2 title_label">작성일</div>
-				<div class="col-md-10">
-					<fmt:formatDate value="${vo.writeDate }" pattern="yyyy.MM.dd" />
-					<fmt:formatDate value="${vo.writeDate }" pattern="hh:mm:ss" />
-				</div>
+				<div class="col-md-10">${vo.writeDate }</div>
 			</li>
+
 			<li class="list-group-item row">
-				<div class="col-md-2 title_label">조회수</div>
-				<div class="col-md-10">${vo.hit }</div>
+				<div class="col-md-2 title_label">최종수정일</div>
+				<div class="col-md-10">
+					<fmt:formatDate value="${vo.updateDate }" pattern="yyyy.MM.dd" />
+					<fmt:formatDate value="${vo.updateDate }" pattern="hh:mm:ss" />
+				</div>
 			</li>
 		</ul>
 
-		<a href="update.do?no=${vo.no }&page=${pageObject.page}&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}"
-		class="btn btn-default">수정</a>
-		<a class="btn btn-default" onclick="return false;"
-		data-toggle="modal" data-target="#myModal" >삭제</a>
-		<a href="list.do?page=${pageObject.page }&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}"
-		 class="btn btn-default">리스트</a>
+		<a href="update.do?no=${vo.no }" class="btn btn-default">수정</a> 
+		<a class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="return false;">삭제</a> 
+		<a href="list.do" class="btn btn-default">리스트</a>
 	</div>
 
 	<!-- Modal -->
@@ -111,8 +114,6 @@ $(function(){
 				<div class="modal-body" >
 					<form action="delete.do" method="post" id="modal_form">
 						<input type="hidden" name="no" value="${vo.no }">
-						<input type="hidden" name="perPageNum"
-						value="${pageObject.perPageNum }">
 						<div class="form-group">
 							<label>비밀번호 :</label>
 							<input name="pw" type="password" class="form-control" id="pw" pattern="[^가-힣ㄱ-ㅎ]{4,20}" required="required" title="4-20자, 한글은 입력할 수 없습니다" />

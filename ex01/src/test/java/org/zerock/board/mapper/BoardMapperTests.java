@@ -7,6 +7,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.board.vo.BoardVO;
 
+import com.webjjang.util.PageObject;
+
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -22,7 +24,7 @@ public class BoardMapperTests {
 	@Test
 	public void testList() {
 		log.info(mapper);
-		log.info(mapper.list());
+		log.info(mapper.list(new PageObject()));
 		
 	}
 	
