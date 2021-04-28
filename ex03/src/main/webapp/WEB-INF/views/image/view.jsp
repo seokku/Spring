@@ -7,7 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+  
+  <!--  Bootstrap 설정 -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -92,7 +93,7 @@ $(function(){
       </tr>
       <tr>
          <th>이미지</th>
-         <td><img src="${vo.fileName }" style="width: 95%" /></td>
+         <td><img src="${vo.fileName }"/></td>
       </tr>
       <tr>
          <th>내용</th>
